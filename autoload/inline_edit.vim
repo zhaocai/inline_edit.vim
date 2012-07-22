@@ -172,3 +172,37 @@ function! inline_edit#HereDoc()
 
   return [start, end, filetype, indent]
 endfunction
+
+function! inline_edit#shEmbeddedScript()
+  let start_pattern = '<<\W\=__\(\u\{2,12}\)__\W\{0,2}$'
+
+  if search(start_pattern, 'Wb') <= 0
+    " fallback to inline_edit#HereDoc
+    return inline_edit#HereDoc()
+  endif
+
+  let start     = line('.') + 1
+  let indent    = indent(line('.'))
+  let line      = getline('.')
+
+  let language = matchlist(line, start_pattern)[1]
+
+  if search('^__' . language .'__\W\{0,2}$', 'W') <= 0
+    " fallback to inline_edit#HereDoc
+    return inline_edit#HereDoc()
+  endif
+  let end = line('.') - 1
+
+  if language == 'PY'
+    let language = 'PYTHON'
+  endif
+
+  if language == 'PL'
+    let language = 'PERL'
+  endif
+
+  let sub_filetype = tolower(language)
+
+  return [start, end, sub_filetype, indent]
+endfunction
+
