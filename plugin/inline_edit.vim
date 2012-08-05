@@ -38,12 +38,7 @@ call add(g:inline_edit_patterns, {
       \ })
 
 call add(g:inline_edit_patterns, {
-      \ 'main_filetype': 'ruby\|perl',
-      \ 'callback':      'inline_edit#HereDoc'
-      \ })
-
-call add(g:inline_edit_patterns, {
-      \ 'main_filetype': 'sh',
+      \ 'main_filetype': 'sh\|ruby\|perl',
       \ 'callback':      'inline_edit#shEmbeddedScript'
       \ })
 

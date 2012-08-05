@@ -195,10 +195,10 @@ function! inline_edit#shEmbeddedScript()
 
   if language == 'PY'
     let language = 'PYTHON'
-  endif
-
-  if language == 'PL'
+  elseif language == 'PL'
     let language = 'PERL'
+  elseif language == 'MD'
+    let language = 'MARKDOWN'
   endif
 
   let sub_filetype = tolower(language)
