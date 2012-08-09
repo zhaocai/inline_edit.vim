@@ -187,7 +187,7 @@ function! inline_edit#shEmbeddedScript()
 
   let language = matchlist(line, start_pattern)[1]
 
-  if search('^__' . language .'__\W\{0,2}$', 'W') <= 0
+  if search('^\s*__' . language .'__\W\{0,2}$', 'W') <= 0
     " fallback to inline_edit#HereDoc
     return inline_edit#HereDoc()
   endif
